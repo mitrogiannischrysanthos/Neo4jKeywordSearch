@@ -1,0 +1,21 @@
+WITH ['Jason Statham', 'Vin Diesel'] as names
+MATCH (person:Person)-[]-(movie:Movie)
+WHERE person.name in names
+WITH movie, size(names) as sizeOfListWithNames, count(DISTINCT person) as count
+WHERE count = sizeOfListWithNames
+RETURN null as person, null as relationship, movie
+LIMIT 10000 
+UNION
+WITH ['Jason Statham', 'Vin Diesel'] as titles
+MATCH (person:Person)-[]-(movie:Movie)
+WHERE movie.title in titles
+WITH person, size(titles) as sizeOfListWithTitles, count(DISTINCT movie) as count
+WHERE count = sizeOfListWithTitles
+RETURN person, null as relationship, null as movie
+LIMIT 10000 
+UNION
+CALL db.index.fulltext.queryRelationships("charactersIndex", '"Jason Statham", "Vin Diesel"') YIELD relationship, score
+UNWIND relationship as rel
+MATCH (person:Person)-[rel]-(movie:Movie)
+RETURN person, relationship, movie
+LIMIT 10000

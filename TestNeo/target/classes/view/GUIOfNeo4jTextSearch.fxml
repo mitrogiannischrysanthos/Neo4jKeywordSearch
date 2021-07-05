@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="636.0" prefWidth="942.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GUIOfNeo4jTextSearch">
+   <children>
+      <Text layoutX="20.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME TO NEO4J TEXT SEARCH" wrappingWidth="242.13671875">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+      <Separator layoutX="20.0" layoutY="31.0" prefHeight="16.0" prefWidth="903.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Separator>
+      <Separator layoutX="506.0" layoutY="215.0" orientation="VERTICAL" prefHeight="370.0" prefWidth="7.0" />
+      <Separator layoutX="20.0" layoutY="205.0" prefHeight="0.0" prefWidth="903.0" />
+      <Text layoutX="210.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Default Results" wrappingWidth="103.13671875">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <Text layoutX="670.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="YMAL Results" wrappingWidth="103.13671875">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <TextField fx:id="userTextField" layoutX="20.0" layoutY="140.0" prefHeight="25.0" prefWidth="827.0" promptText="Search in NEO4J TEXT SEARCH" />
+      <Button fx:id="searchButton" alignment="TOP_LEFT" layoutX="854.0" layoutY="140.0" mnemonicParsing="false" onAction="#handleSearchButtonClick" prefHeight="25.0" prefWidth="72.0" text="Search" textFill="#1a01bc">
+      	<graphic>
+			<ImageView fitHeight="15" fitWidth="16">
+				<image>
+			    	<Image url="file:///C:/Users/chris/OneDrive/Υπολογιστής/Διπλωματική/search_icon.png" />
+			    </image>
+			</ImageView>
+		</graphic>
+        <font>
+        	<Font name="System Italic" size="12.0" />
+        </font>
+     </Button>
+      <Text layoutX="20.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of results:" wrappingWidth="109.962890625" />
+      <TextArea fx:id="numberOfResults" editable="false" layoutX="132.0" layoutY="176.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="64.0" />
+      <Text layoutX="245.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Execution time:" wrappingWidth="90.962890625" />
+      <TextArea fx:id="executionTime" editable="false" layoutX="336.0" layoutY="176.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="64.0" />
+      <Text layoutX="407.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="seconds." wrappingWidth="53.962890625" />
+      <Text layoutX="527.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of results:" wrappingWidth="103.13671875" />
+      <TextArea fx:id="numberOfYMALResults" editable="false" layoutX="638.0" layoutY="176.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="64.0" />
+      <Text layoutX="722.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Execution time:" wrappingWidth="90.962890625" />
+      <TextArea fx:id="executionTimeYMAL" editable="false" layoutX="824.0" layoutY="176.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="46.0" />
+      <Text layoutX="874.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="seconds." wrappingWidth="53.962890625" />
+      <Separator layoutX="506.0" layoutY="170.0" orientation="VERTICAL" prefHeight="31.0" prefWidth="7.0" />
+      <Text layoutX="23.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Database" wrappingWidth="103.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
+      <ChoiceBox fx:id="databaseChoiceBox" layoutX="23.0" layoutY="73.0" prefHeight="25.0" prefWidth="91.0" />
+      <CheckBox fx:id="yCheckBox" layoutX="540.0" layoutY="69.0" mnemonicParsing="false" text="YMAL results" />
+      <Separator layoutX="272.0" layoutY="47.0" orientation="VERTICAL" prefHeight="67.0" prefWidth="7.0" />
+      <Button layoutX="847.0" layoutY="73.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="78.0" text="Help" />
+      <Separator layoutX="20.0" layoutY="120.0" prefHeight="0.0" prefWidth="903.0" />
+      <Separator layoutX="719.0" layoutY="47.0" orientation="VERTICAL" prefHeight="67.0" prefWidth="7.0" />
+      <Text layoutX="291.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Limit of results: " wrappingWidth="89.478515625" />
+      <TextArea fx:id="limitTextArea" layoutX="385.0" layoutY="65.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="64.0" text="10000" />
+      <Pagination fx:id="defaultPagination" layoutX="16.0" layoutY="236.0" pageCount="0" prefHeight="392.0" prefWidth="485.0" />
+      <Pagination fx:id="paginationYMAL" layoutX="514.0" layoutY="237.0" pageCount="0" prefHeight="392.0" prefWidth="413.0" />
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</Pane>

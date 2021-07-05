@@ -1,0 +1,41 @@
+CALL{
+     CALL db.index.fulltext.queryNodes("movieDataBase", "name:Brad^1.5 OR title:Brad^1.5 OR birth_name:Brad^1.5 OR original_title:Brad^1.5 OR place_of_birth:Brad OR country:Brad OR language:Brad OR description:Brad OR genre:Brad OR year:Brad OR primary_profession:Brad OR name:Pitt^1.5 OR title:Pitt^1.5 OR birth_name:Pitt^1.5 OR original_title:Pitt^1.5 OR place_of_birth:Pitt OR country:Pitt OR language:Pitt OR description:Pitt OR genre:Pitt OR year:Pitt OR primary_profession:Pitt") YIELD node, score
+	 RETURN node, null as relationship, null as movie, score
+     UNION
+     CALL{
+   	    CALL db.index.fulltext.queryNodes("movieDataBase", "name:Brad^1.5 OR title:Brad^1.5 OR birth_name:Brad^1.5 OR original_title:Brad^1.5 OR place_of_birth:Brad OR country:Brad OR language:Brad OR description:Brad OR genre:Brad OR year:Brad OR primary_profession:Brad OR name:Pitt^1.5 OR title:Pitt^1.5 OR birth_name:Pitt^1.5 OR original_title:Pitt^1.5 OR place_of_birth:Pitt OR country:Pitt OR language:Pitt OR description:Pitt OR genre:Pitt OR year:Pitt OR primary_profession:Pitt") YIELD node, score
+	 	WITH node as person, score
+		MATCH (person:Person)-[r]-(m:Movie)
+WHERE m.title =~ '(?i).*\\bBrad\\b.*'
+ OR m.original_title =~ '(?i).*\\bBrad\\b.*'
+ OR m.country =~ '(?i).*\\bBrad\\b.*'
+ OR m.language =~ '(?i).*\\bBrad\\b.*'
+ OR m.description =~ '(?i).*\\bBrad\\b.*'
+ OR m.genre =~ '(?i).*\\bBrad\\b.*'
+ OR m.year =~ '(?i).*\\bBrad\\b.*'
+ OR m.title =~ '(?i).*\\bPitt\\b.*'
+ OR m.original_title =~ '(?i).*\\bPitt\\b.*'
+ OR m.country =~ '(?i).*\\bPitt\\b.*'
+ OR m.language =~ '(?i).*\\bPitt\\b.*'
+ OR m.description =~ '(?i).*\\bPitt\\b.*'
+ OR m.genre =~ '(?i).*\\bPitt\\b.*'
+ OR m.year =~ '(?i).*\\bPitt\\b.*'
+		RETURN person as node, r as relationship, m as movie, score
+        UNION
+        CALL db.index.fulltext.queryNodes("movieDataBase", "name:Brad^1.5 OR title:Brad^1.5 OR birth_name:Brad^1.5 OR original_title:Brad^1.5 OR place_of_birth:Brad OR country:Brad OR language:Brad OR description:Brad OR genre:Brad OR year:Brad OR primary_profession:Brad OR name:Pitt^1.5 OR title:Pitt^1.5 OR birth_name:Pitt^1.5 OR original_title:Pitt^1.5 OR place_of_birth:Pitt OR country:Pitt OR language:Pitt OR description:Pitt OR genre:Pitt OR year:Pitt OR primary_profession:Pitt") YIELD node, score
+		WITH node as movie, score
+		MATCH (m:Person)-[r]-(movie:Movie)
+WHERE m.name =~ '(?i).*\\bBrad\\b.*'
+ OR m.birth_name =~ '(?i).*\\bBrad\\b.*'
+ OR m.place_of_birth =~ '(?i).*\\bBrad\\b.*'
+ OR m.primary_profession =~ '(?i).*\\bBrad\\b.*'
+ OR m.name =~ '(?i).*\\bPitt\\b.*'
+ OR m.birth_name =~ '(?i).*\\bPitt\\b.*'
+ OR m.place_of_birth =~ '(?i).*\\bPitt\\b.*'
+ OR m.primary_profession =~ '(?i).*\\bPitt\\b.*'
+		RETURN m as node, r as relationship, movie, score
+	}
+    RETURN node, relationship, movie, max(score) as score
+}
+RETURN node, relationship, movie
+LIMIT 10000
